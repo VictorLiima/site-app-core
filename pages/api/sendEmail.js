@@ -1,17 +1,20 @@
 const nodemailer = require('nodemailer')
 require('dotenv').config()
 
-export default function sendEmail(req, res){
+export default  async function sendEmail(req, res){
     let transporter = nodemailer.createTransport(
-        {host: process.env.HOST,
-        port: process.env.PORT,
-        auth: {
-            user: process.env.USER_EMAIL,
-            pass: process.env.USER_PASSWORD
-        }}
+        {
+            host: process.env.HOST,
+            port: process.env.PORT,
+            auth: {
+                user: process.env.USER_EMAIL,
+                pass: process.env.USER_PASSWORD
+            }
+        }
     )
-
-    transporter.sendMail({
+    
+    
+    await transporter.sendMail({
         from: `${req.body.name} <${req.body.email}>`,
         to: process.env.USER_EMAIL,
         replyTo: req.body.email,
