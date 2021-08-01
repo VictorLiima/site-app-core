@@ -5,12 +5,45 @@ import faFacebook from '@fortawesome/fontawesome-free-brands/faFacebook'
 import faInstagram from '@fortawesome/fontawesome-free-brands/faInstagram'
 import faGithub from '@fortawesome/fontawesome-free-brands/faGithub'
 
-class Main extends React.Component {
-  render() {
+function sendEmail(){
+  const form = document.getElementById('formEmail')
 
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault()
+
+    const name = document.getElementById('nome').value
+    const email = document.getElementById('email').value
+    const message = document.getElementById('message').value
+
+    fetch('/api/sendEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        message
+      })
+    }).then((response)=>{
+      console.log(response);
+      alert('Email enviado com sucesso');
+    }).catch((error)=>{
+      console.error(error);
+      alert('Erro ao enviar o email')
+    })
+
+  })
+
+}
+class Main extends React.Component {
+
+  render() {
+    
     let close = <div className="close" onClick={() => {this.props.onCloseArticle()}}></div>
 
     return (
+
       <div id="main" style={this.props.timeout ? {display: 'flex'} : {display: 'none'}}>
 
 
@@ -30,23 +63,24 @@ class Main extends React.Component {
         </article>
 
         <article id="contact" className={`${this.props.article === 'contact' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
+          
           <h2 className="major">Contato</h2>
-          <form method="post" action="#">
+          <form id="formEmail" method="post">
             <div className="field half first">
-              <label htmlFor="name">Name</label>
-              <input type="text" name="name" id="name" />
+              <label htmlFor="nome">Nome</label>
+              <input type="text" name="nome" id="nome"/>
             </div>
             <div className="field half">
               <label htmlFor="email">Email</label>
-              <input type="text" name="email" id="email" />
+              <input type="text" name="email" id="email"/>
             </div>
             <div className="field">
-              <label htmlFor="message">Message</label>
+              <label htmlFor="message">Mensagem</label>
               <textarea name="message" id="message" rows="4"></textarea>
             </div>
             <ul className="actions">
-              <li><input type="submit" value="Send Message" className="special" /></li>
-              <li><input type="reset" value="Reset" /></li>
+              <li><input onClick={sendEmail}type="submit" value="Enviar Mensagem" className="special" /></li>
+              <li><input type="reset" value="Exluir" /></li>
             </ul>
           </form>
           <ul className="icons">
@@ -79,12 +113,14 @@ class Main extends React.Component {
 }
 }
 
+
 Main.propTypes = {
     route: PropTypes.object,
-  article: PropTypes.string,
-  articleTimeout: PropTypes.bool,
-  onCloseArticle: PropTypes.func,
-  timeout: PropTypes.bool
+    article: PropTypes.string,
+    articleTimeout: PropTypes.bool,
+    onCloseArticle: PropTypes.func,
+    timeout: PropTypes.bool,
+    sendEmail: PropTypes.func
 }
 
 export default Main
