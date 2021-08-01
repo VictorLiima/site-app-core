@@ -3,8 +3,8 @@ require('dotenv').config()
 
 export default function sendEmail(req, res){
     let transporter = nodemailer.createTransport(
-        {host: 'smtp.gmail.com',
-        port: 465,
+        {host: process.env.HOST,
+        port: process.env.PORT,
         auth: {
             user: process.env.USER_EMAIL,
             pass: process.env.USER_PASSWORD
