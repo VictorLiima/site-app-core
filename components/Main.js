@@ -6,40 +6,48 @@ import faInstagram from '@fortawesome/fontawesome-free-brands/faInstagram'
 import faGithub from '@fortawesome/fontawesome-free-brands/faGithub'
 import faLinkedin from '@fortawesome/fontawesome-free-brands/faLinkedin';
 
-function sendEmail(){
-  const form = document.getElementById('formEmail')
 
-  form.addEventListener('submit', (e)=>{
-    e.preventDefault()
+async function sendEmail(event){
+  try {
 
-    const name = document.getElementById('nome').value
-    const email = document.getElementById('email').value
-    const message = document.getElementById('message').value
+      event.preventDefault()
+  
+      const name = document.getElementById('nome').value
+      const email = document.getElementById('email').value
+      const message = document.getElementById('message').value
+      
+      if(!name && email && message){
+        let error_form = new Error();
+        error_form.message = "Campo nome é obrigatório!"
+        throw error_form
+      }else if(!email && name && message){
+        let error_form = new Error();
+        error_form.message = "Campo email é obrigatório!"
+        throw error_form;
+      }else if(!message && email && name){
+        let error_form = new Error();
+        error_form.message = "Campo mensagem é obrigatório!"
+        throw error_form;
+      }else if(!name && !email && !message || !name && !email && message || name && !email && !message || !name && email && !message){
+        let error_form = new Error();
+        error_form.message = "Preencha todos os campos!"
+        throw error_form;
+      }
 
-    if(!name || !email || !message){
-      alert('Preecha todos os campos porfavor')
-    }
-    
-    fetch('/api/sendEmail', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        message
+      await fetch('/api/sendEmail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message
+        })
       })
-    }).then((response)=>{
-      console.log(response);
-      alert('Email enviado com sucesso');
-    }).catch((error)=>{
-      console.error(error);
-      alert('Erro ao enviar o email')
-    })
-
-  })
-
+    } catch (error) {
+      alert(error.message);
+    }
 }
 class Main extends React.Component {
 
@@ -53,8 +61,7 @@ class Main extends React.Component {
 
 
         <article id="work" className={`${this.props.article === 'work' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
-          <h2 className="major">Serviços</h2>
-          {/* <span className="image main"><img src="/static/images/pic02.jpg" alt="" /></span> */}
+          <h2 className="work">Serviços</h2>
           <ul>
             <li>
               <h3>E-commerce</h3>
@@ -89,7 +96,7 @@ class Main extends React.Component {
         </article>
 
         <article id="about" className={`${this.props.article === 'about' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
-          <h2 className="major">Sobre</h2>
+          <h2 className="about">Sobre</h2>
           <p>Olá, me chamo João Victor de Lima Martins, tenho 21 anos, natural de Castro-pr, cidade onde resido atualmente. Sou graduado em Tecnologia em Análise e Desenvolvimento de Sistemas, pela Universidade Tecnológica Federal do Paraná, obtive meu primeiro contato com a área de desenvolvimento quando entrei na faculdade em 2017, e me apaixonei pela área desde então.</p>
           <p>Sou muito esforçado,e sempre busco a maneira ideal para solucionar os problemas de vez. Meus conhecimentos em linguagens são variados nunca busquei focar em apenas uma, tenho mais familiaridade com javascript, o que trás um conhecimento em Node.js. Porém tive contato com uma gama grande de linguagens, desde C até PHP, então com certeza conseguirei atender as demandas com a linguagem mais apropriada.</p>
           <p>Para finalizar, sempre estarei disponível para analisar propostas, entre em contato e solicite seu orçamento.</p>
@@ -98,7 +105,7 @@ class Main extends React.Component {
 
         <article id="contact" className={`${this.props.article === 'contact' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
           
-          <h2 className="major">Contato</h2>
+          <h2 className="contact">Contato</h2>
           <form id="formEmail" method="post">
             <div className="field half first">
               <label htmlFor="nome">*Nome</label>
@@ -113,16 +120,17 @@ class Main extends React.Component {
               <textarea name="message" id="message" rows="4"></textarea>
             </div>
             <ul className="actions">
-              <li><input onClick={sendEmail}type="submit" value="Enviar Mensagem" className="special" /></li>
+              <li><input onClick={sendEmail} type="submit" value="Enviar Mensagem" className="special" /></li>
               <li><input type="reset" value="Exluir" /></li>
             </ul>
           </form>
+          <h2 className="social" >Redes Sociais</h2>
           <ul className="icons">
             {/* <li><a href="#">
               <FontAwesomeIcon icon={faTwitter} />
             </a></li> */}
             <li><a target="_blank" href="https://www.facebook.com/Victor.Lima1327/">
-              <FontAwesomeIcon icon={faFacebook} />
+              <FontAwesomeIcon icon={faFacebook}/>
             </a></li>
             <li><a target="_blank" href="https://www.instagram.com/victor.developer/">
               <FontAwesomeIcon icon={faInstagram} />
@@ -137,6 +145,9 @@ class Main extends React.Component {
           {close}
         </article>
 
+        <article id="sendEmail" className={`${this.props.article === 'contact' ? 'active' : ''} ${this.props.articleTimeout ? 'timeout' : ''}`} style={{display:'none'}}>
+
+        </article>
       </div>
     )
 
