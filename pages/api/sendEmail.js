@@ -23,7 +23,12 @@ export default async function sendEmail(req, res){
                     Mensagem : ${req.body.message}`
         }
 
-        await mail.send(data)
+        await mail.send(data).then(() => {
+            console.log('Email sent')
+          })
+          .catch((error) => {
+            console.error(error)
+          })
 
         res.status(200).json({message : 'Email enviado com Sucesso'})
     // NODEMAILER IRÁ ENTRAR QUANDO TIVERMOS EMAIL
