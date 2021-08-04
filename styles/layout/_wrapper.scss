@@ -10,7 +10,7 @@
 		@include vendor('display', 'flex');
 		@include vendor('flex-direction', 'column');
 		@include vendor('align-items', 'center');
-		@include vendor('justify-content', 'space-between');
+		@include vendor('justify-content', 'center');
 		position: relative;
 		min-height: 100vh;
 		width: 100%;

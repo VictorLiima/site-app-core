@@ -3,7 +3,7 @@ import FontAwesomeIcon from '@fortawesome/react-fontawesome'
 import faCode from '@fortawesome/fontawesome-free-solid/faCode'
 
 const Header = (props) => (
-    <header id="header" style={props.timeout ? {display: 'none'} : {}}>
+    <header id="header" style={props.article !== '' ? {display: 'none'} : {}}>
         <div className="logo">
             {/*<span className="icon fa-diamond"></span>*/}
             <FontAwesomeIcon icon={faCode} transform="grow-18" />
