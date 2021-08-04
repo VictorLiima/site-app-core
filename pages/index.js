@@ -31,11 +31,13 @@ class IndexPage extends React.Component {
         }
     }
 
-    handleOpenArticle(article) {
+    handleOpenArticle(article, message=false) {
         this.setState({
             isArticleVisible: !this.state.isArticleVisible,
-            article
+            article,
+            message
         })
+
 
         setTimeout(() => {
             this.setState({
@@ -81,13 +83,20 @@ class IndexPage extends React.Component {
                     <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
 
                     <div id="wrapper">
-                        <Header onOpenArticle={this.handleOpenArticle} timeout={this.state.timeout} />
+                        <Header 
+                            onOpenArticle={this.handleOpenArticle} 
+                            timeout={this.state.timeout}
+                            article={this.state.article}
+                            />
                         <Main
                             isArticleVisible={this.state.isArticleVisible}
                             timeout={this.state.timeout}
                             articleTimeout={this.state.articleTimeout}
                             article={this.state.article}
                             onCloseArticle={this.handleCloseArticle}
+                            onOpenArticle={this.handleOpenArticle}
+                            article={this.state.article}
+                            message={this.state.message}
                         />
                         <Footer timeout={this.state.timeout} />
                     </div>
