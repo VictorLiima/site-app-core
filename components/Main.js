@@ -5,6 +5,7 @@ import faFacebook from "@fortawesome/fontawesome-free-brands/faFacebook";
 import faInstagram from "@fortawesome/fontawesome-free-brands/faInstagram";
 import faGithub from "@fortawesome/fontawesome-free-brands/faGithub";
 import faLinkedin from "@fortawesome/fontawesome-free-brands/faLinkedin";
+import faWhatsapp from "@fortawesome/fontawesome-free-brands/faWhatsapp";
 import { useEffect, useState } from "react";
 
 function Main(props) {
@@ -343,6 +344,14 @@ function Main(props) {
           <li>
             <a
               target="_blank"
+              href="https://api.whatsapp.com/send?phone=5542998445953&text=Estou%20entrando%20em%20contato%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento!"
+            >
+              <FontAwesomeIcon icon={faWhatsapp} />
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
               href="https://www.instagram.com/victor.developer/"
             >
               <FontAwesomeIcon icon={faInstagram} />
@@ -412,6 +421,14 @@ function Main(props) {
           <li>
             <a target="_blank" href="https://www.facebook.com/Victor.Lima1327/">
               <FontAwesomeIcon icon={faFacebook} />
+            </a>
+          </li>
+          <li>
+            <a
+              target="_blank"
+              href="https://api.whatsapp.com/send?phone=5542998445953&text=Estou%20entrando%20em%20contato%20atrav%C3%A9s%20do%20site%20e%20gostaria%20de%20solicitar%20um%20or%C3%A7amento!"
+            >
+              <FontAwesomeIcon icon={faWhatsapp} />
             </a>
           </li>
           <li>
