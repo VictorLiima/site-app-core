@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import emailjs from "emailjs-com";
 //import faTwitter from '@fortawesome/fontawesome-free-brands/faTwitter'
 import faFacebook from "@fortawesome/fontawesome-free-brands/faFacebook";
 import faInstagram from "@fortawesome/fontawesome-free-brands/faInstagram";
@@ -61,18 +62,38 @@ function Main(props) {
         throw error_form;
       }
 
-      await fetch("/api/sendEmail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-          subject: emailSubject,
-        }),
-      });
+      // await fetch("/api/sendEmail", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     name,
+      //     email,
+      //     message,
+      //     subject: emailSubject,
+      //   }),
+      // });
+
+      emailjs
+        .send(
+          "service_wmrvxtn",
+          "CONTACT_SITE_FORM",
+          {
+            to_name: "João Victor",
+            name: name,
+            message: message,
+            reply_to: email,
+            subject: emailSubject ? emailSubject : "Contato através do site",
+          },
+          "user_S4zj0meOb53N2b563hVeK"
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
 
       const form = document.getElementById("formEmailContact");
       form.reset();
