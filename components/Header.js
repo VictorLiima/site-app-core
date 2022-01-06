@@ -4,6 +4,8 @@ import faCode from '@fortawesome/fontawesome-free-solid/faCode'
 
 const Header = (props) => (
     <header id="header" style={props.article !== '' ? {display: 'none'} : {}}>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5814569536831381"
+        crossorigin="anonymous"></script>
         <div className="logo">
             {/*<span className="icon fa-diamond"></span>*/}
             <FontAwesomeIcon icon={faCode} transform="grow-18" />

@@ -182,7 +182,9 @@ function Main(props) {
     <div
       id="main"
       style={props.article ? { display: "flex" } : { display: "none" }}
-    >
+    > 
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5814569536831381"
+     crossorigin="anonymous"></script>
       <article
         id="work"
         className={`${props.article === "work" ? "active" : ""} ${
