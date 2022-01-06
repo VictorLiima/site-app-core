@@ -76,6 +76,8 @@ class IndexPage extends React.Component {
           this.state.isArticleVisible ? "is-article-visible" : ""
         }`}
       >
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5814569536831381"
+     crossorigin="anonymous"></script>
         <div>
           <Head>
             <title>Victor Lima</title>
