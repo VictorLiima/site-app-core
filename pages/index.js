@@ -78,16 +78,8 @@ class IndexPage extends React.Component {
       >
         <div>
           <Head>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5814569536831381"
-        crossorigin="anonymous"></script>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-6RKJQ1S7SS"></script>
-            <script>
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments)}
-              gtag('js', new Date());
-
-              gtag('config', 'G-6RKJQ1S7SS');
-            </script>
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5814569536831381"
+     crossorigin="anonymous"></script>
             <title>Victor Lima</title>
             <meta charset="utf-8" />
             <meta name="language" content="pt-br"></meta>
